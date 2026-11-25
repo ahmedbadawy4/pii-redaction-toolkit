@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pii-redaction-toolkit"
+version = "0.1.0"
+description = "Detect and redact personal data and secrets in text. A prototype."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "LicenseRef-Proprietary"
+license-files = ["LICENSE"]
+authors = [{ name = "Ahmed Badawy" }]
+keywords = ["pii", "redaction", "privacy", "secrets", "detection"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Security",
+  "Topic :: Text Processing",
+  "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+phone = ["phonenumbers>=9,<10"]
+names = ["names>=0.3,<1"]
+ner = ["spacy>=3,<4"]
+dev = ["build>=1,<2", "pytest>=8,<10", "ruff>=0.6,<1"]
+
+[project.scripts]
+piikit = "piikit.__main__:main"
+
+[project.urls]
+Source = "https://github.com/ahmedbadawy4/pii-redaction-toolkit"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+piikit = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
